@@ -17,7 +17,9 @@ public interface PlaylistService {
 
     MessageResponse reorderSongInPlaylist(Long playlistId, Long songId, int newPosition, String email);
 
+
     PaginatedResponse<PlaylistResponse> getAllPublicPlaylists(int page, int size, String search);
 
     PaginatedResponse<PlaylistResponse> getMyPlaylists(String email, int page, int size, String search);
+
 }
