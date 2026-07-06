@@ -2,7 +2,10 @@ package com.bd.musify.serviceImpl;
 
 import com.bd.musify.dto.request.PlaylistRequest;
 import com.bd.musify.dto.response.MessageResponse;
+<<<<<<< HEAD
 import com.bd.musify.dto.response.PaginatedResponse;
+=======
+>>>>>>> 509e4e47d967fb60afeb5bd9a44f74e58903cee9
 import com.bd.musify.dto.response.PlaylistResponse;
 import com.bd.musify.entity.AppUser;
 import com.bd.musify.entity.Playlist;
@@ -16,6 +19,7 @@ import com.bd.musify.service.PlaylistService;
 import com.bd.musify.util.FileHandlerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+<<<<<<< HEAD
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +30,13 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+=======
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.UUID;
+>>>>>>> 509e4e47d967fb60afeb5bd9a44f74e58903cee9
 
 @Service
 public class PlaylistServiceImpl implements PlaylistService {
@@ -176,6 +187,7 @@ public class PlaylistServiceImpl implements PlaylistService {
         return new MessageResponse("Song reordered in playlist successfully to position" + newPosition);
     }
 
+<<<<<<< HEAD
     @Override
     public PaginatedResponse<PlaylistResponse> getAllPublicPlaylists(int page, int size, String search) {
         Pageable pageable = PageRequest.of(page, size);
@@ -230,6 +242,8 @@ public class PlaylistServiceImpl implements PlaylistService {
         );
     }
 
+=======
+>>>>>>> 509e4e47d967fb60afeb5bd9a44f74e58903cee9
     private Playlist validatePlaylistAccess(Long id, String email) {
         Playlist playlist = playlistRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Playlist not found"));

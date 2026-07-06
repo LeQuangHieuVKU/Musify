@@ -1,14 +1,19 @@
 package com.bd.musify.respository;
 
 import com.bd.musify.entity.Playlist;
+<<<<<<< HEAD
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+=======
+import org.springframework.data.jpa.repository.JpaRepository;
+>>>>>>> 509e4e47d967fb60afeb5bd9a44f74e58903cee9
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
+<<<<<<< HEAD
 
     @Query("SELECT DISTINCT p FROM Playlist p JOIN PlaylistSong ps ON p.id = ps.playlist.id WHERE p.isPublic = true AND (LOWER(p.name) LIKE LOWER(CONCAT('%', :search, '%')) OR LOWER(p.description) LIKE LOWER(CONCAT('%', :search, '%')))")
     Page<Playlist> findPublicPlaylistsWithSongsByNameOrDescription(String search, Pageable pageable);
@@ -20,4 +25,6 @@ public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
             Long userId1, String name, Long userId2, String description, Pageable pageable);
 
     Page<Playlist> findByAppUserId(Long id, Pageable pageable);
+=======
+>>>>>>> 509e4e47d967fb60afeb5bd9a44f74e58903cee9
 }

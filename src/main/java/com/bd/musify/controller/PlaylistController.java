@@ -3,10 +3,15 @@ package com.bd.musify.controller;
 
 import com.bd.musify.dto.request.PlaylistRequest;
 import com.bd.musify.dto.response.MessageResponse;
+<<<<<<< HEAD
 import com.bd.musify.dto.response.PaginatedResponse;
 import com.bd.musify.dto.response.PlaylistResponse;
 import com.bd.musify.entity.Playlist;
 import com.bd.musify.entity.PlaylistSong;
+=======
+import com.bd.musify.dto.response.PlaylistResponse;
+import com.bd.musify.entity.Playlist;
+>>>>>>> 509e4e47d967fb60afeb5bd9a44f74e58903cee9
 import com.bd.musify.service.PlaylistService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -80,6 +85,7 @@ public class PlaylistController {
         MessageResponse response = playlistService.reorderSongInPlaylist(playlistId, songId, newPosition, email);
         return ResponseEntity.ok(response);
     }
+<<<<<<< HEAD
 
     @GetMapping("/getAllPublicPlaylists")
     public ResponseEntity<?> getAllPublicPlaylists(@RequestParam(defaultValue = "0") int page,
@@ -103,4 +109,6 @@ public class PlaylistController {
         return ResponseEntity.ok(result);
     }
 
+=======
+>>>>>>> 509e4e47d967fb60afeb5bd9a44f74e58903cee9
 }
