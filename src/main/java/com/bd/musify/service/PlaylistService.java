@@ -4,6 +4,7 @@ import com.bd.musify.dto.request.PlaylistRequest;
 import com.bd.musify.dto.response.MessageResponse;
 import com.bd.musify.dto.response.PaginatedResponse;
 import com.bd.musify.dto.response.PlaylistResponse;
+import com.bd.musify.dto.response.PlaylistWithSongsResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface PlaylistService {
@@ -22,4 +23,7 @@ public interface PlaylistService {
 
     PaginatedResponse<PlaylistResponse> getMyPlaylists(String email, int page, int size, String search);
 
+    PlaylistWithSongsResponse getPlaylistWithSongs(Long playlistId, String email);
+
+    MessageResponse deletePlaylist(Long playlistId, String email);
 }

@@ -4,6 +4,7 @@ import com.bd.musify.dto.request.PlaylistRequest;
 import com.bd.musify.dto.response.MessageResponse;
 import com.bd.musify.dto.response.PaginatedResponse;
 import com.bd.musify.dto.response.PlaylistResponse;
+import com.bd.musify.dto.response.PlaylistWithSongsResponse;
 import com.bd.musify.entity.AppUser;
 import com.bd.musify.entity.Playlist;
 import com.bd.musify.entity.PlaylistSong;
@@ -234,6 +235,40 @@ public class PlaylistServiceImpl implements PlaylistService {
                 playlistPage.isLast(),
                 playlistPage.isFirst()
         );
+    }
+
+    @Override
+    public PlaylistWithSongsResponse getPlaylistWithSongs(Long playlistId, String email) {
+        Playlist playlist = playlistRepository.findById(playlistId)
+                .orElseThrow(() -> new RuntimeException("Playlist not found"));
+
+        if (!playlist.getIsPublic()) {
+            if (email == null){
+                throw new RuntimeException("This playlist is private");
+            }
+
+            AppUser appUser = getUserByEmail(email);
+            boolean isOwner = playlist.getAppUser().getId().equals(appUser.getId());
+            boolean isAdmin = "ADMIN".equals(appUser.getName());
+
+            if (!isOwner && !isAdmin) {
+                throw new RuntimeException("This playlist is private");
+            }
+        }
+
+        List<PlaylistSong> playlistSongs = playlistSongRepository.findByPlaylistIdOrderByPositionAsc(playlistId);
+
+        return PlaylistWithSongsResponse.fromEntity(playlist, playlistSongs, baseUrl);
+    }
+
+    @Override
+    public MessageResponse deletePlaylist(Long playlistId, String email) {
+        Playlist playlist = validatePlaylistAccess(playlistId,email);
+
+        playlistSongRepository.deleteByPlaylistId(playlistId);
+        playlistRepository.delete(playlist);
+
+        return new MessageResponse("Playlist deleted successfully");
     }
 
     private Playlist validatePlaylistAccess(Long id, String email) {
