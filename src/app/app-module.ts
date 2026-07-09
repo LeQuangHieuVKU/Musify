@@ -27,9 +27,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Login } from './features/auth/login/login';
 import { Home } from './features/home/home';
+import { AuthImagePipe } from './core/pipes/auth-image-pipe';
+import { withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './core/interceptors/auth-interceptor';
+import { Layout } from './shared/layout/layout';
 
 @NgModule({
-  declarations: [App, Login, Home],
+  declarations: [App, Login, Home, AuthImagePipe, Layout],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -56,7 +60,10 @@ import { Home } from './features/home/home';
     MatCheckboxModule,
     DragDropModule,
   ],
-  providers: [provideBrowserGlobalErrorListeners(), provideHttpClient()],
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(withInterceptors([authInterceptor])),
+  ],
   bootstrap: [App],
 })
 export class AppModule {}

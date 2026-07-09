@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class AdminController {
     private SongService songService;
 
     @PostMapping("/addSong")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SongResponse>  addSong(
             @RequestParam("title") @NotBlank(message = "Title is required")
             @Size(max = 100, message = "Title must not exceed 100 characters") String title,
@@ -56,6 +58,7 @@ public class AdminController {
     }
 
     @PutMapping("/updateSong/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SongResponse> updateSong(@PathVariable Long id,
                                                     @RequestParam("title") @NotBlank(message = "Title is required")
                                                         @Size(max = 100, message = "Title must not exceed 100 characters") String title,
@@ -72,6 +75,7 @@ public class AdminController {
     }
 
     @DeleteMapping("/deleteSong/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<MessageResponse> deleteSong(@PathVariable Long id, Authentication authentication) {
         String email = authentication.getName();
         MessageResponse response = songService.deleteSong(id, email);
