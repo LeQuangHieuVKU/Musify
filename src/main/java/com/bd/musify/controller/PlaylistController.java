@@ -2,11 +2,16 @@ package com.bd.musify.controller;
 
 
 import com.bd.musify.dto.request.PlaylistRequest;
-import com.bd.musify.dto.response.*;
-import com.bd.musify.entity.Playlist;
-import com.bd.musify.entity.PlaylistSong;
+import com.bd.musify.dto.response.MessageResponse;
+<<<<<<<<< Temporary merge branch 1
 import com.bd.musify.dto.response.PlaylistResponse;
 import com.bd.musify.entity.Playlist;
+=========
+import com.bd.musify.dto.response.PaginatedResponse;
+import com.bd.musify.dto.response.PlaylistResponse;
+import com.bd.musify.entity.Playlist;
+import com.bd.musify.entity.PlaylistSong;
+>>>>>>>>> Temporary merge branch 2
 import com.bd.musify.service.PlaylistService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -80,6 +85,8 @@ public class PlaylistController {
         MessageResponse response = playlistService.reorderSongInPlaylist(playlistId, songId, newPosition, email);
         return ResponseEntity.ok(response);
     }
+<<<<<<<<< Temporary merge branch 1
+=========
 
     @GetMapping("/getAllPublicPlaylists")
     public ResponseEntity<?> getAllPublicPlaylists(@RequestParam(defaultValue = "0") int page,
@@ -103,20 +110,5 @@ public class PlaylistController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/getPlaylistWithSongs/{playlistId}")
-    public ResponseEntity<PlaylistWithSongsResponse> getPlaylistWithSongs(@PathVariable Long playlistId,
-                                                                          Authentication authentication) {
-        String email = authentication.getName();
-        PlaylistWithSongsResponse response = playlistService.getPlaylistWithSongs(playlistId, email);
-        return ResponseEntity.ok(response);
-    }
-
-    @DeleteMapping("/deletePlaylist/{playlistId}")
-    public ResponseEntity<MessageResponse> deletePlaylist(@PathVariable Long playlistId,
-                                                          Authentication authentication) {
-        String email = authentication.getName();
-        MessageResponse response = playlistService.deletePlaylist(playlistId, email);
-        return ResponseEntity.ok(response);
-    }
-
+>>>>>>>>> Temporary merge branch 2
 }
