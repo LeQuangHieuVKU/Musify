@@ -26,9 +26,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { Login } from './features/auth/login/login';
+import { Home } from './features/home/home';
 
 @NgModule({
-  declarations: [App, Login],
+  declarations: [App, Login, Home],
   imports: [
     BrowserModule,
     AppRoutingModule,
