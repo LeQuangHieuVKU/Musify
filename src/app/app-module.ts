@@ -31,9 +31,10 @@ import { AuthImagePipe } from './core/pipes/auth-image-pipe';
 import { withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth-interceptor';
 import { Layout } from './shared/layout/layout';
+import { UploadSong } from './features/upload-song/upload-song';
 
 @NgModule({
-  declarations: [App, Login, Home, AuthImagePipe, Layout],
+  declarations: [App, Login, Home, AuthImagePipe, Layout, UploadSong],
   imports: [
     BrowserModule,
     AppRoutingModule,

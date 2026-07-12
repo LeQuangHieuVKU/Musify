@@ -28,6 +28,11 @@
         <mat-icon>home</mat-icon>
         <span>Home</span>
       </a>
+      <a *ngIf="isAdmin" routerLink="/upload-song" routerLinkActive="active" class="nav-item admin-nav-item">
+        <mat-icon>upload</mat-icon>
+        <span>Upload Song</span>
+        <span class="admin-indicator">ADMIN</span>
+      </a>
     </nav>
 
     <div class="sidebar-divider"></div>
