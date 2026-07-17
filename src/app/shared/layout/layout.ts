@@ -47,6 +47,7 @@ export class Layout implements OnInit, OnDestroy {
   @ViewChild('scrollTriggeredPlaylists') set scrollTriggeredPlaylists(element: ElementRef) {
     if (element) {
       this._scrollTriggeredPlaylists = element;
+      this.setupPlaylistInfiniteScroll();
     } else {
       this._scrollTriggeredPlaylists = null!;
     }

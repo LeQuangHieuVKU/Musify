@@ -28,9 +28,25 @@
         <mat-icon>home</mat-icon>
         <span>Home</span>
       </a>
-      <a *ngIf="isAdmin" routerLink="/upload-song" routerLinkActive="active" class="nav-item admin-nav-item">
+      <a
+        *ngIf="isAdmin"
+        routerLink="/upload-song"
+        routerLinkActive="active"
+        class="nav-item admin-nav-item"
+      >
         <mat-icon>upload</mat-icon>
         <span>Upload Song</span>
+        <span class="admin-indicator">ADMIN</span>
+      </a>
+
+      <a
+        *ngIf="isAdmin"
+        routerLink="/my-uploads"
+        routerLinkActive="active"
+        class="nav-item admin-nav-item"
+      >
+        <mat-icon>cloud_upload</mat-icon>
+        <span>My Uploads</span>
         <span class="admin-indicator">ADMIN</span>
       </a>
     </nav>
@@ -110,11 +126,9 @@
             <span class="menu-text" *ngIf="isUserMenuExpanded">Menu</span>
             <mat-icon class="user-icon">account_circle</mat-icon>
             <span class="user-name-text" {{userName}}></span>
-            <span
-              class="user-badge"
-              [class.admin-badge]="isAdmin"
-              >{{isAdmin ?  'ADMIN': 'USER'}}</span
-            >
+            <span class="user-badge" [class.admin-badge]="isAdmin">{{
+              isAdmin ? 'ADMIN' : 'USER'
+            }}</span>
             <mat-icon class="dropdown-icon" [class.rotated]="isUserMenuExpanded"
               >arrow_drop_down</mat-icon
             >

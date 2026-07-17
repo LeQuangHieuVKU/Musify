@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { PageResponse } from '../models/user.models';
+import { MessageResponse, PageResponse } from '../models/user.models';
 import { Song } from '../models/song.model';
 import { Observable } from 'rxjs';
 
@@ -35,7 +35,16 @@ export class SongService {
   getSongById(id: number): Observable<Song> {
     return this.http.get<Song>(`${this.baseUrl}/getSongById/${id}`);
   }
+  
   addsSong(formData: FormData): Observable<Song> {
     return this.http.post<Song>(`${this.baseUrl}/addSong`, formData);
+  }
+
+  updateSong(songId:number, formData: FormData): Observable<Song> {
+    return this.http.put<Song>(`${this.baseUrl}/updateSong/${songId}`, formData);
+  }
+
+  deleteSong(songId:number): Observable<MessageResponse> {
+    return this.http.delete<MessageResponse>(`${this.baseUrl}/deleteSong/${songId}`);
   }
 }

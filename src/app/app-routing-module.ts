@@ -6,6 +6,7 @@ import { authGuard } from './core/guards/auth-guard';
 import { Layout } from './shared/layout/layout';
 import { adminGuard } from './core/guards/admin-guard';
 import { UploadSong } from './features/upload-song/upload-song';
+import { MyUploads } from './features/my-uploads/my-uploads';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
     children: [
       { path: 'home', component: Home },
       { path: 'upload-song', component: UploadSong, canActivate: [adminGuard] },
+      { path: 'my-uploads', component: MyUploads, canActivate: [authGuard] },
     ],
   },
   { path: '**', redirectTo: '/login' },

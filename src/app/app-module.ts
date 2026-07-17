@@ -32,16 +32,29 @@ import { withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth-interceptor';
 import { Layout } from './shared/layout/layout';
 import { UploadSong } from './features/upload-song/upload-song';
+import { ConfirmationDialog } from './shared/confirmation-dialog/confirmation-dialog';
+import { EditSongDialog } from './shared/edit-song-dialog/edit-song-dialog';
+import { MyUploads } from './features/my-uploads/my-uploads';
+import { CdkAriaLive } from "../../node_modules/@angular/cdk/types/_a11y-module-chunk";
 
 @NgModule({
-  declarations: [App, Login, Home, AuthImagePipe, Layout, UploadSong],
+  declarations: [
+    App,
+    Login,
+    Home,
+    AuthImagePipe,
+    Layout,
+    UploadSong,
+    ConfirmationDialog,
+    EditSongDialog,
+    MyUploads,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-
     //Material Modules
     MatButtonModule,
     MatCardModule,
@@ -60,7 +73,8 @@ import { UploadSong } from './features/upload-song/upload-song';
     MatSelectModule,
     MatCheckboxModule,
     DragDropModule,
-  ],
+    CdkAriaLive
+],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(withInterceptors([authInterceptor])),
