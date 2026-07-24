@@ -35,7 +35,7 @@ import { UploadSong } from './features/upload-song/upload-song';
 import { ConfirmationDialog } from './shared/confirmation-dialog/confirmation-dialog';
 import { EditSongDialog } from './shared/edit-song-dialog/edit-song-dialog';
 import { MyUploads } from './features/my-uploads/my-uploads';
-import { CdkAriaLive } from "../../node_modules/@angular/cdk/types/_a11y-module-chunk";
+import { CdkAriaLive } from '@angular/cdk/a11y';
 
 @NgModule({
   declarations: [
@@ -73,8 +73,8 @@ import { CdkAriaLive } from "../../node_modules/@angular/cdk/types/_a11y-module-
     MatSelectModule,
     MatCheckboxModule,
     DragDropModule,
-    CdkAriaLive
-],
+    CdkAriaLive,
+  ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(withInterceptors([authInterceptor])),

@@ -64,7 +64,7 @@ export class Login implements OnInit {
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required, Validators.minLength(6)],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
 
     this.forgotPasswordForm = this.formBuilder.group({
@@ -145,7 +145,7 @@ export class Login implements OnInit {
     this.loginLoading = true;
     this.loginError = '';
 
-    const [email, password] = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
     this.authService.login({ email, password }).subscribe({
       next: (response) => {

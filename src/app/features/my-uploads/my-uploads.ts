@@ -24,7 +24,7 @@ export class MyUploads implements OnDestroy, OnInit {
   searchQuery = '';
 
   currentPage = 0;
-  pageSize = 10;
+  pageSize = 1;
   totalElements = 0;
   hasMoreSongs = true;
 

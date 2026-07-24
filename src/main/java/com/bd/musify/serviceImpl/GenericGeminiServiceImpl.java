@@ -15,7 +15,7 @@ public class GenericGeminiServiceImpl implements GenericGeminiService {
 
     private static final Logger logger = LoggerFactory.getLogger(GenericGeminiServiceImpl.class);
 
-    @Value("${gemini.api.key}")
+    @Value("${gemimi.api.key}")
     private String geminiApiKey;
 
     @Value("${gemini.models}")
