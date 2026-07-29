@@ -140,7 +140,7 @@ export class MyUploads implements OnDestroy, OnInit {
   }
 
   playSong(song: Song) {
-    //TODO
+    this.musicPlayerService.playSong(song);
   }
 
   openAddToPlaylistDialog(event: Event, song: Song) {

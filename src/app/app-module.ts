@@ -36,6 +36,7 @@ import { ConfirmationDialog } from './shared/confirmation-dialog/confirmation-di
 import { EditSongDialog } from './shared/edit-song-dialog/edit-song-dialog';
 import { MyUploads } from './features/my-uploads/my-uploads';
 import { CdkAriaLive } from '@angular/cdk/a11y';
+import { MusicPlayer } from './shared/music-player/music-player';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { CdkAriaLive } from '@angular/cdk/a11y';
     ConfirmationDialog,
     EditSongDialog,
     MyUploads,
+    MusicPlayer,
   ],
   imports: [
     BrowserModule,
