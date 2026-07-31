@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { MessageResponse, PageResponse } from '../models/user.models';
-import { Song } from '../models/song.model';
+import { AiSongData, Song } from '../models/song.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -46,5 +46,9 @@ export class SongService {
 
   deleteSong(songId:number): Observable<MessageResponse> {
     return this.http.delete<MessageResponse>(`${this.baseUrl}/deleteSong/${songId}`);
+  }
+
+  getSongAiInsights(songId: number): Observable<AiSongData> {
+    return this.http.get<AiSongData>('$environment.apiUrl}/song/getSongAiInsights/${songId}');
   }
 }

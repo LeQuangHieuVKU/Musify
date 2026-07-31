@@ -36,7 +36,7 @@ export class MusicPlayerService implements OnDestroy {
   public currentIndex$ = this.currentIndexSubject.asObservable();
   public isShuffle$ = this.isShuffleSubject.asObservable();
   public repeatMode$ = this.repeatModeSubject.asObservable();
-  public isExplanded$ = this.isExplandedSubject.asObservable();
+  public isExpanded$ = this.isExplandedSubject.asObservable();
 
   constructor() {
     this.audio = new Audio();

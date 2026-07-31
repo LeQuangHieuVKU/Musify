@@ -1,0 +1,84 @@
+<div
+  class="expanded-player"
+  #expendedPlayerContainer
+  [class.visible]="isExpanded"
+  [class.scroll.disabled]="isAiPanelActive"
+  *ngIf="currentSong"
+>
+  <div class="background-gradient"></div>
+
+  <button class="close-btn" (click)="collapse()" title="Collapse">
+    <mat-icon>keyboard_arrow_down</mat-icon>
+  </button>
+
+  <div class="player-content">
+    <div class="main-section">
+      <div class="album-art-container" [class.playing]="isPlaying">
+        <div class="water-waves" *ngIf="isPlaying">
+          <div class="wave-ring wave-ring-1"></div>
+          <div class="wave-ring wave-ring-2"></div>
+          <div class="wave-ring wave-ring-3"></div>
+          <div class="wave-ring wave-ring-4"></div>
+          <div class="wave-ring wave-ring-5"></div>
+          <div class="wave-ring wave-ring-6"></div>
+        </div>
+
+        <div class="album-art-glow" [class.active]="isPlaying"></div>
+        <img
+          [src]="currentSong.imageUrl || authImage"
+          [alt]="currentSong?.title"
+          class="album-art"
+        />
+      </div>
+
+      <div class="song-info-section">
+        <h1 class="song-title">{{ currentSong.title }}</h1>
+        <p class="artist-name">{{ currentSong.artist }}</p>
+      </div>
+
+      <div class="controls-section">
+        <div class="progress-section">
+          <span class="time">{{ formatTime(currentTime) }}</span>
+          <div class="progress-wrapper" (click)="onProgressClick($event)">
+            <div class="progress-background"></div>
+            <div class="progress-fill" [style.widtg.%]="progress"></div>
+            <input
+              type="range"
+              class="progress-bar"
+              step="0.1"
+              max="duration"
+              [value]="currentTime"
+              (input)="onProgressChange($event)"
+            />
+          </div>
+          <span class="time">{{ formatTime(duration) }}</span>
+        </div>
+        <div class="control-buttons">
+          <button
+            class="control-btn"
+            [class.active]="isShuffle"
+            (click)="toggleShuffle()"
+            [title]="isShuffle ? 'Disable shuffle' : 'Enable shuffle'"
+          >
+            <mat-icon>shuffle</mat-icon>
+          </button>
+          <button class="control-btn" (click)="playPrevious()" title="Previous">
+            <mat-icon>skip_previous</mat-icon>
+          </button>
+          <button
+            class="control-btn play-btn"
+            (click)="togglePlayPause()"
+            [title]="isPlaying ? 'Pause' : 'Play'"
+          >
+            <mat-icon *ngIf="!isPlaying">play_arrow</mat-icon>
+            <mat-icon *ngIf="!isPlaying">pause</mat-icon>
+          </button>
+
+          <button class="control-btn" (click)="playPrevious()" title="Previous">
+            <mat-icon>skip_previous</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

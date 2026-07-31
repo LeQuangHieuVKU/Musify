@@ -13,3 +13,14 @@ export interface SongRequest {
   title: string;
   artist: string;
 }
+
+export interface AiSongData {
+  analysis: string;
+  moods: string[];
+  genre: string;
+  tempo: number;
+  key: string;
+  energy: number;
+  similarArtists: string[];
+  recommededFor: string;
+}
