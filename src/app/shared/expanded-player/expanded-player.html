@@ -2,7 +2,7 @@
   class="expanded-player"
   #expendedPlayerContainer
   [class.visible]="isExpanded"
-  [class.scroll.disabled]="isAiPanelActive"
+  [class.scroll-disabled]="isAiPanelActive"
   *ngIf="currentSong"
 >
   <div class="background-gradient"></div>
@@ -74,9 +74,67 @@
             <mat-icon *ngIf="!isPlaying">pause</mat-icon>
           </button>
 
-          <button class="control-btn" (click)="playPrevious()" title="Previous">
-            <mat-icon>skip_previous</mat-icon>
+          <button class="control-btn" (click)="playNext()" title="Next">
+            <mat-icon>skip_next</mat-icon>
           </button>
+
+          <button
+            class="control-btn"
+            [class.active]="repeatMode != 'off'"
+            (click)="toggleRepeat()"
+            [title]="
+              repeatMode === 'off'
+                ? 'Enable repeat'
+                : repeatMode === 'all'
+                  ? 'Enable repeat one'
+                  : 'Disable repeat'
+            "
+          >
+            <mat-icon>{{ repeatMode === 'one' ? 'repeate_one' : 'repeat' }}</mat-icon>
+          </button>
+        </div>
+
+        <div class="volume-section">
+          <mat-icon class="volume-icon" *ngIf="volume >= 0.5">volume_up</mat-icon>
+          <mat-icon class="volume-icon" *ngIf="volume <= 0.5 && volume > 0">volume_down</mat-icon>
+          <mat-icon class="volume-icon" *ngIf="volume === 0">volume_off</mat-icon>
+          <div class="volume-wrapper" (click)="onVolumeClick($event)">
+            <div class="volume-background"></div>
+            <div class="volume-fill" [style.width.%]="volumePercentage"></div>
+            <input
+              type="range"
+              class="volume-slider"
+              value="volume"
+              min="0"
+              max="1"
+              step="0.01"
+              (input)="onVolumeChange($event)"
+            />
+          </div>
+        </div>
+
+        <div class="ai-button-wrapper">
+          <button
+            class="ai-btn"
+            (click)="toggleAiPanel()"
+            title="AI Insights"
+            [class.active]="showAiPanel"
+          >
+            <div class="ai-btn-gradient"></div>
+            <div class="ai-btn-content">
+              <span class="ai-robot-icon"></span>
+              <span class="ai-label">🤖 AI Insights</span>
+            </div>
+          </button>
+          <div class="flying-particles-container" *ngIf="showFlyingParticles">
+            <div
+              class="flying-particle"
+              *ngFor="
+                let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+              "
+              [style.animation-delay]="(i * 0.075) + 's'"
+            ></div>
+          </div>
         </div>
       </div>
     </div>

@@ -192,7 +192,7 @@ export class ExpandedPlayer extends MusicPlayer implements OnInit, OnDestroy {
 
     this.animationFrameId = requestAnimationFrame(() => this.visualize());
 
-    this.analyser.getByteFrequencyData(this.dataArray);
+    this.analyser.getByteFrequencyData(this.dataArray as Uint8Array<ArrayBuffer>);
 
     let sum = 0;
     for (let i = 0; i < this.dataArray.length; i++) {
