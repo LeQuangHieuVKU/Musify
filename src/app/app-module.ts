@@ -38,6 +38,8 @@ import { MyUploads } from './features/my-uploads/my-uploads';
 import { CdkAriaLive } from '@angular/cdk/a11y';
 import { MusicPlayer } from './shared/music-player/music-player';
 import { ExpandedPlayer } from './shared/expanded-player/expanded-player';
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { CreatePlaylist } from './features/create-playlist/create-playlist';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,7 @@ import { ExpandedPlayer } from './shared/expanded-player/expanded-player';
     MyUploads,
     MusicPlayer,
     ExpandedPlayer,
+    CreatePlaylist,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ import { ExpandedPlayer } from './shared/expanded-player/expanded-player';
     MatCheckboxModule,
     DragDropModule,
     CdkAriaLive,
+    CdkOverlayOrigin,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

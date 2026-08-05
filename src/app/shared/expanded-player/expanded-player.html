@@ -25,8 +25,8 @@
 
         <div class="album-art-glow" [class.active]="isPlaying"></div>
         <img
-          [src]="currentSong.imageUrl || authImage"
-          [alt]="currentSong?.title"
+          [src]="currentSong.imageUrl | authImage"
+          [alt]="currentSong.title"
           class="album-art"
         />
       </div>
@@ -132,11 +132,145 @@
               *ngFor="
                 let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
               "
-              [style.animation-delay]="(i * 0.075) + 's'"
+              [style.animation-delay]="i * 0.075 + 's'"
             ></div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="queue-section">
+      <h2 class="queue-title">Queue</h2>
+      <div class="queue-list">
+        <div
+          *ngFor="let song of queue; let i = index"
+          class="queue-item"
+          [class.active]="i === currentIndex"
+          (click)="playFromQueue(i)"
+        >
+          <div class="queue-item-thumbnail">
+            <img src="song.imageUrl | authImage" [alt]="song.title" />
+            <div class="queue-item-overlay" *ngIf="i === currentIndex && isPlaying">
+              <mat-icon class="queue-play-icon">play_arrow</mat-icon>
+            </div>
+          </div>
+          <div class="queue-item-info">
+            <div class="queue-item-title" [class.playing]="i === currentIndex">
+              {{ song.title }}
+            </div>
+            <div class="queue-item-artist">{{ song.artist }}</div>
+          </div>
+          <div class="queue-item-number" *ngIf="i !== currentIndex">{{ i + 1 }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ai-panel" #aiPanel [class.visible]="showAiPanel" [style.top.px]="aiPanelTop">
+    <div class="ai-panel-header">
+      <h3 class="ai-panel-title">
+        <span class="ai-icon">🤖</span>
+        AI Insights
+      </h3>
+      <button class="ai-panel-close" (click)="toggleAiPanel()" title="Close">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div class="ai-panel-content" *ngIf="!loadingAiData && aiSongData">
+      <div class="ai-section" [@fadeInUp]>
+        <h4 class="ai-section-title">
+          <span class="title-icon">💬</span>
+          Song Analysis
+        </h4>
+        <p class="ai-text">{{ aiSongData.analysis }}</p>
+      </div>
+      <div class="ai-section" [@fadeInUp]>
+        <h4 class="ai-section-title">
+          <span class="title-icon">🎵</span>
+          Musical Elements
+        </h4>
+        <div class="ai-info-grid">
+          <div class="ai-info-item">
+            <span class="info-label">Genre</span>
+            <span class="info-value">{{ aiSongData.genre }}</span>
+          </div>
+          <div class="ai-info-item">
+            <span class="info-label">Tempo</span>
+            <span class="info-value">{{ aiSongData.tempo }}</span>
+          </div>
+          <div class="ai-info-item">
+            <span class="info-label">Key</span>
+            <span class="info-value">{{ aiSongData.key }}</span>
+          </div>
+          <div class="ai-info-item">
+            <span class="info-label">Energy</span>
+            <span class="info-value">{{ aiSongData.energy }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="ai-section" [@fadeInUp]>
+        <h4 class="ai-section-title">
+          <span class="title-icon">✨</span>
+          Mood & Vibe
+        </h4>
+        <div class="ai-tags">
+          <span class="ai-tag" *ngFor="let mood of aiSongData.moods">{{ mood }}</span>
+        </div>
+      </div>
+      <div class="ai-section" [@fadeInUp]>
+        <h4 class="ai-section-title">
+          <span class="title-icon">👥</span>
+          Similar Artists
+        </h4>
+        <div class="ai-tags">
+          <span class="ai-tag artist-tag" *ngFor="let artist of aiSongData.similarArtists">{{
+            artist
+          }}</span>
+        </div>
+      </div>
+      <div class="ai-section" [@fadeInUp]>
+        <h4 class="ai-section-title">
+          <span class="title-icon">💡</span>
+          Perfect For
+        </h4>
+        <p class="ai-text">{{ aiSongData.recommededFor }}</p>
+      </div>
+    </div>
+
+    <div class="ai-loading" *ngIf="loadingAiData">
+      <div class="ai-brain-container">
+        <mat-icon class="ai-brain-icon">psychology</mat-icon>
+        <div class="ai-particles">
+          <div class="particle" *ngFor="let i of [1, 2, 3, 4, 5, 6, 7, 8]"></div>
+        </div>
+        <div class="ai-dots-orbit">
+          <div class="orbit-dot" *ngFor="let i; for: [1, 2, 3]"></div>
+        </div>
+      </div>
+      <div class="ai-status-container">
+        <p class="ai-status-text">
+          <span class="status-icon">🤖</span>
+          <span class="typing-text">AI is analyzing your song</span>
+        </p>
+        <div class="ai-progress-steps">
+          <div class="progress-step" [class.active]="currentLoadingStep >= 0">
+            <span class="step-icon">🎵</span>
+            <span class="step-text">Analyzing musical elements</span>
+          </div>
+          <div class="progress-step" [class.active]="currentLoadingStep >= 1">
+            <span class="step-icon">✨</span>
+            <span class="step-text">Detecting mood and vibe</span>
+          </div>
+          <div class="progress-step" [class.active]="currentLoadingStep >= 2">
+            <span class="step-icon">🎯</span>
+            <span class="step-text">Finding Similar artists</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ai-error" *ngIf="aiError && !loadingAiData">
+      <mat-icon class="ai-error-icon">error_outline</mat-icon>
+      <p class="ai-error-text">{{ aiError }}</p>
+      <button class="ai-retry-btn" (click)="loadAiInsights()">Try Again</button>
     </div>
   </div>
 </div>

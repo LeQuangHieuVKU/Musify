@@ -7,6 +7,7 @@ import { Layout } from './shared/layout/layout';
 import { adminGuard } from './core/guards/admin-guard';
 import { UploadSong } from './features/upload-song/upload-song';
 import { MyUploads } from './features/my-uploads/my-uploads';
+import { CreatePlaylist } from './features/create-playlist/create-playlist';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'home', component: Home },
       { path: 'upload-song', component: UploadSong, canActivate: [adminGuard] },
       { path: 'my-uploads', component: MyUploads, canActivate: [authGuard] },
+      { path: 'create-playlist', component: CreatePlaylist },
     ],
   },
   { path: '**', redirectTo: '/login' },
